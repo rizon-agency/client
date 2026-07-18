@@ -5,14 +5,14 @@ import {
   AdminPageHeader,
   AdminPageTitle,
 } from "@/components/admin-page";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@repo/ui/components/ui/card";
 import { Link } from "@tanstack/react-router";
 
 interface AdminDashboardPageProps {

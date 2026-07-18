@@ -6,7 +6,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui/components/ui/button";
 import { env } from "@/config/env";
 import { Logo } from "@repo/ui/logo-mark";
 import { Pricing } from "@/components/pricing";
@@ -42,7 +42,7 @@ export default function Home() {
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
             SaaS Template gives you the essential infrastructure—accounts,
             setup, database, API, and a polished app shell—without inheriting
-            another product's assumptions.
+            another product&apos;s assumptions.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button asChild size="lg">

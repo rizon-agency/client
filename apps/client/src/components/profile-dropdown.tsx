@@ -5,15 +5,15 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+} from "@repo/ui/components/ui/dropdown-menu";
+import { Button } from "@repo/ui/components/ui/button";
 import { ChevronsUpDown } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { onError } from "@/lib/base-api";
 import { api } from "@/api";
-import { Spinner } from "@/components/ui/spinner";
-import { cn } from "@/lib/utils";
+import { Spinner } from "@repo/ui/components/ui/spinner";
+import { cn } from "@repo/ui/utils";
 
 interface ProfileDropdownProps {
   user: {

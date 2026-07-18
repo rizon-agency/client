@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDropzone } from "react-dropzone";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

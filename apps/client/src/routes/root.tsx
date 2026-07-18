@@ -1,7 +1,7 @@
 import { api } from "@/api";
 import { ApiError } from "@/lib/base-api";
 import { RouteLoadingBar } from "@/components/route-loading-bar";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@repo/ui/components/ui/tooltip";
 import { ErrorScreen } from "@/pages/error/page";
 import { Outlet, createRootRoute, redirect } from "@tanstack/react-router";
 

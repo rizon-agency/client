@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
+import { Textarea } from "@repo/ui/components/ui/textarea";
+import { cn } from "@repo/ui/utils";
 
 function CustomTextarea(props: React.ComponentProps<typeof Textarea>) {
   return (

@@ -1,6 +1,6 @@
 import { api } from "@/api";
 import { PasswordInput } from "@/components/password-input";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui/components/ui/button";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -8,14 +8,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from "@repo/ui/components/ui/alert-dialog";
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
-import { Spinner } from "@/components/ui/spinner";
+} from "@repo/ui/components/ui/field";
+import { Spinner } from "@repo/ui/components/ui/spinner";
 import { onError } from "@/lib/base-api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";

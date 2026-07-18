@@ -1,15 +1,15 @@
 import { api } from "@/api";
 import { PasswordInput } from "@/components/password-input";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui/components/ui/button";
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
+} from "@repo/ui/components/ui/field";
 import { CustomInput } from "@/components/custom-input";
-import { Separator } from "@/components/ui/separator";
-import { Spinner } from "@/components/ui/spinner";
+import { Separator } from "@repo/ui/components/ui/separator";
+import { Spinner } from "@repo/ui/components/ui/spinner";
 import { onError } from "@/lib/base-api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";

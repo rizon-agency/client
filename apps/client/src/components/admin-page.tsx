@@ -5,8 +5,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { cn } from "@/lib/utils";
+} from "@repo/ui/components/ui/breadcrumb";
+import { cn } from "@repo/ui/utils";
 import { Link } from "@tanstack/react-router";
 import { Fragment } from "react";
 

@@ -1,13 +1,13 @@
 import { api } from "@/api";
 import { PasswordInput } from "@/components/password-input";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui/components/ui/button";
 import {
   Field,
   FieldGroup,
   FieldError,
   FieldLabel,
-} from "@/components/ui/field";
-import { Spinner } from "@/components/ui/spinner";
+} from "@repo/ui/components/ui/field";
+import { Spinner } from "@repo/ui/components/ui/spinner";
 import { onError } from "@/lib/base-api";
 import { resetPasswordRoute } from "@/routes/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +16,7 @@ import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import z from "zod";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@repo/ui/components/ui/separator";
 
 const schema = z
   .object({

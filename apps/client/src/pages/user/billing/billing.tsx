@@ -1,5 +1,5 @@
 import { api } from "@/api";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@repo/ui/components/ui/spinner";
 import { onError } from "@/lib/base-api";
 import type { BillingInterval, BillingPlanKey } from "@repo/constants/billing";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

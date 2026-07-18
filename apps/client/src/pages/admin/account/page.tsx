@@ -12,8 +12,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Field, FieldLabel } from "@/components/ui/field";
+} from "@repo/ui/components/ui/card";
+import { Field, FieldLabel } from "@repo/ui/components/ui/field";
 import { ChangePassword } from "@/components/change-password";
 
 interface AdminAccountPageProps {

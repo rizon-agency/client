@@ -2,7 +2,7 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from "@repo/ui/components/ui/sidebar";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserSidebar } from "./sidebar";
 

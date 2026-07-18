@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui/components/ui/button";
 import {
   Field,
   FieldGroup,
   FieldLabel,
   FieldError,
-} from "@/components/ui/field";
+} from "@repo/ui/components/ui/field";
 import { CustomInput } from "@/components/custom-input";
 import { PasswordInput } from "@/components/password-input";
 import { Controller, useForm } from "react-hook-form";
@@ -13,9 +13,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/api";
 import { onError } from "@/lib/base-api";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@repo/ui/components/ui/spinner";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@repo/ui/components/ui/separator";
 
 const signInSchema = z.object({
   email: z.email().max(255),

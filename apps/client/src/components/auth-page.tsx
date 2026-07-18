@@ -1,5 +1,5 @@
 import { env } from "@/config/env";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 import { Logo } from "@repo/ui/logo-mark";
 import { Link } from "@tanstack/react-router";
 

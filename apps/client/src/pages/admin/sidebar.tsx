@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar";
+} from "@repo/ui/components/ui/sidebar";
 import { Link, useLocation } from "@tanstack/react-router";
 import { Logo, LogoWithText } from "@repo/ui/logo-mark";
 import {

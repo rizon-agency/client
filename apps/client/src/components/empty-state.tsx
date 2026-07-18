@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 import { InboxIcon, type LucideIcon } from "lucide-react";
 
 interface EmptyStateProps {
