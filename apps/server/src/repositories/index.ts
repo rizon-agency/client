@@ -1,0 +1,79 @@
+import { UserRepository } from "./user";
+import { SessionRepository } from "./session";
+import type { DBConnection } from "@server/infrastructure/database/client";
+import { PasswordRepository } from "./password";
+import { TokenRepository } from "./token";
+import { SettingRepository } from "./setting";
+import { FileRepository } from "./file";
+import { BillingRepository } from "./billing";
+
+interface RepositoriesConstructorProps {
+  dbConnection: DBConnection;
+}
+
+export class Repositories {
+  private pool;
+  private db;
+
+  public user;
+  public token;
+  public session;
+  public password;
+  public setting;
+  public file;
+  public billing;
+
+  public constructor({ dbConnection }: RepositoriesConstructorProps) {
+    this.pool = dbConnection.pool;
+    this.db = dbConnection.db;
+
+    this.user = new UserRepository({
+      db: dbConnection.db,
+    });
+
+    this.password = new PasswordRepository({
+      db: dbConnection.db,
+    });
+
+    this.token = new TokenRepository({
+      db: dbConnection.db,
+    });
+
+    this.session = new SessionRepository({
+      db: dbConnection.db,
+    });
+
+    this.setting = new SettingRepository({
+      db: dbConnection.db,
+    });
+
+    this.file = new FileRepository({
+      db: dbConnection.db,
+    });
+
+    this.billing = new BillingRepository({
+      db: dbConnection.db,
+    });
+  }
+
+  public async transaction<R>(
+    cb: (transaction: { tx: Repositories }) => Promise<R>,
+  ): Promise<R> {
+    return await this.db.transaction(async (tx) => {
+      const repositories = new Repositories({
+        dbConnection: {
+          db: tx,
+          pool: this.pool,
+        },
+      });
+
+      return cb({
+        tx: repositories,
+      });
+    });
+  }
+
+  public async close() {
+    await this.pool.end();
+  }
+}

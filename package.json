@@ -1,0 +1,46 @@
+{
+  "name": "saas-template",
+  "packageManager": "bun@1.3.5",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix",
+    "typecheck": "turbo typecheck",
+    "check:env": "turbo check:env",
+    "format": "turbo format",
+    "db:studio": "turbo db:studio",
+    "db:generate": "turbo db:generate",
+    "db:migrate": "turbo db:migrate",
+    "containers:up": "docker compose up",
+    "containers:down": "docker compose down",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@tanstack/react-router": "^1.163.3",
+    "@tanstack/react-router-devtools": "^1.163.3",
+    "hono": "^4.11.8",
+    "turbo": "^2.8.3"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx,js,jsx,json,css,md}": [
+      "bun prettier --write"
+    ],
+    "apps/client/**/*.{ts,tsx,js,jsx}": [
+      "bun --cwd apps/client eslint --fix"
+    ],
+    "apps/server/**/*.{ts,tsx}": [
+      "bun --cwd apps/server eslint --fix"
+    ]
+  }
+}

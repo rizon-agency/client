@@ -1,0 +1,14 @@
+**/node_modules
+**/dist
+**/.turbo
+**/.cache
+**/.next
+**/.vite
+**/.git
+**/.github
+**/.vscode
+**/.claude
+**/.DS_Store
+**/coverage
+**/*.log
+**/.s3rver_data
