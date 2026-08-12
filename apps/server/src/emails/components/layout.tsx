@@ -104,21 +104,21 @@ export const EmailLayout = ({
           {logoUrl ? (
             <Img
               src={logoUrl}
-              alt="SaaS Template"
+              alt="Client"
               width="40"
               height="40"
               style={logo}
             />
           ) : (
-            <Text style={brand}>SaaS Template</Text>
+            <Text style={brand}>Client</Text>
           )}
         </Section>
         <Section style={contentSection}>{children}</Section>
         <Hr style={divider} />
         <Section style={footerSection}>
           <Text style={footerText}>
-            You received this email from SaaS Template. If it wasn&apos;t meant
-            for you, you can safely ignore it.
+            You received this email from Client. If it wasn&apos;t meant for
+            you, you can safely ignore it.
           </Text>
         </Section>
       </Container>

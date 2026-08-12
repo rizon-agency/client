@@ -1,4 +1,4 @@
-# SaaS Template
+# Client
 
 A clean, typed, batteries-included foundation for building focused SaaS products.
 It gives you the essential infrastructure — accounts, first-admin setup, billing,
