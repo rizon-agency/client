@@ -13,7 +13,6 @@ import {
   useSidebar,
 } from "@repo/ui/components/ui/sidebar";
 import { Link, useLocation } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
 import { Logo, LogoWithText } from "@repo/ui/logo-mark";
 import {
   LayersIcon,
@@ -31,32 +30,19 @@ interface AdminSidebarProps {
 }
 
 interface NavigationItem {
-  labelKey: "nav.dashboard" | "nav.users" | "nav.queues";
+  label: string;
   to: "/admin/dashboard" | "/admin/users" | "/admin/queues";
   icon: LucideIcon;
 }
 
 const navigation: NavigationItem[] = [
-  {
-    labelKey: "nav.dashboard",
-    to: "/admin/dashboard",
-    icon: LayoutDashboardIcon,
-  },
-  {
-    labelKey: "nav.users",
-    to: "/admin/users",
-    icon: UsersIcon,
-  },
-  {
-    labelKey: "nav.queues",
-    to: "/admin/queues",
-    icon: LayersIcon,
-  },
+  { label: "Dashboard", to: "/admin/dashboard", icon: LayoutDashboardIcon },
+  { label: "Users", to: "/admin/users", icon: UsersIcon },
+  { label: "Queues", to: "/admin/queues", icon: LayersIcon },
 ];
 
 export const AdminSidebar: React.FC<AdminSidebarProps> = ({ user }) => {
   const location = useLocation();
-  const { t } = useTranslation();
   const { isMobile, setOpenMobile } = useSidebar();
 
   const closeOnMobile = () => {
@@ -98,11 +84,11 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ user }) => {
                   <SidebarMenuButton
                     asChild
                     isActive={location.pathname === item.to}
-                    tooltip={t(item.labelKey)}
+                    tooltip={item.label}
                   >
                     <Link to={item.to} onClick={closeOnMobile}>
                       <item.icon />
-                      <span>{t(item.labelKey)}</span>
+                      <span>{item.label}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

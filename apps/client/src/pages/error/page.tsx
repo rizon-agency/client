@@ -2,7 +2,6 @@ import { errorRoute } from "@/routes/error";
 import { ApiError } from "@/lib/base-api";
 import { Link } from "@tanstack/react-router";
 import { MoveRightIcon } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 interface ErrorScreenProps {
   error: string;
@@ -13,8 +12,6 @@ export const ErrorScreen: React.FC<ErrorScreenProps> = ({
   error,
   description,
 }) => {
-  const { t } = useTranslation();
-
   return (
     <main className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-sm flex flex-col">
@@ -23,7 +20,7 @@ export const ErrorScreen: React.FC<ErrorScreenProps> = ({
           <span className="text-muted-foreground mt-2">{description}</span>
         )}
         <Link to="/" className="mt-6 flex items-center gap-2 text-primary">
-          {t("common.goHome")} <MoveRightIcon size={16} />
+          Go Home <MoveRightIcon size={16} />
         </Link>
       </div>
     </main>
@@ -36,29 +33,25 @@ export const ErrorPage = () => {
 };
 
 export const RouteErrorScreen = ({ error }: { error: Error }) => {
-  const { t } = useTranslation();
-
   if (error instanceof ApiError) {
     return (
       <ErrorScreen
         error={`${error.statusCode} ${error.message}`}
-        description={t("errors.loadDescription")}
+        description="Something went wrong while loading this page."
       />
     );
   }
 
   return (
-    <ErrorScreen error={t("errors.generic")} description={error.message} />
+    <ErrorScreen error="Something went wrong" description={error.message} />
   );
 };
 
 export const RouteNotFound = () => {
-  const { t } = useTranslation();
-
   return (
     <ErrorScreen
-      error={t("errors.notFound")}
-      description={t("errors.notFoundDescription")}
+      error="Page not found"
+      description="The page you are looking for does not exist."
     />
   );
 };

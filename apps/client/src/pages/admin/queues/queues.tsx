@@ -3,13 +3,11 @@ import { onError } from "@/lib/base-api";
 import { adminQueuesRoute } from "@/routes/admin/queues";
 import { Spinner } from "@repo/ui/components/ui/spinner";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { FailedJobsTable } from "./failed-jobs-table";
 import { QueueCounts } from "./queue-counts";
 
 export const Queues = () => {
-  const { t } = useTranslation();
   const search = adminQueuesRoute.useSearch();
   const navigate = adminQueuesRoute.useNavigate();
   const queryClient = useQueryClient();
@@ -38,7 +36,7 @@ export const Queues = () => {
       api.queue.retryJob({ queue: selectedQueue, jobId }),
     onError,
     onSuccess: async () => {
-      toast.success(t("adminQueues.jobRetried"));
+      toast.success("Job queued for retry.");
       await invalidate();
     },
   });
@@ -48,7 +46,7 @@ export const Queues = () => {
       api.queue.removeJob({ queue: selectedQueue, jobId }),
     onError,
     onSuccess: async () => {
-      toast.success(t("adminQueues.jobRemoved"));
+      toast.success("Job removed.");
       await invalidate();
     },
   });
@@ -57,7 +55,7 @@ export const Queues = () => {
     mutationFn: () => api.queue.retryAll({ queue: selectedQueue }),
     onError,
     onSuccess: async () => {
-      toast.success(t("adminQueues.allRetried"));
+      toast.success("Failed jobs queued for retry.");
       await invalidate();
     },
   });

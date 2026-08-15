@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
-import en from "@repo/i18n/messages/en";
 
 export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: en.metadata.siteName,
-    short_name: en.metadata.siteName,
-    description: en.metadata.description,
+    name: "Client",
+    short_name: "Client",
+    description:
+      "A clean, typed foundation for building focused SaaS products.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a0a0a",

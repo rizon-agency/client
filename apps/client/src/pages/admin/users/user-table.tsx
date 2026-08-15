@@ -17,7 +17,6 @@ import {
   TableRow,
 } from "@repo/ui/components/ui/table";
 import { MoreHorizontalIcon } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 type User = Awaited<ReturnType<typeof api.user.list>>["users"][number];
 
@@ -31,6 +30,9 @@ interface UserTableProps {
   verificationUserId?: string;
 }
 
+const roleLabel = (role: string) =>
+  role === "admin" ? "Admin" : role === "user" ? "User" : role;
+
 export const UserTable = ({
   isPasswordResetPending,
   isVerificationPending,
@@ -40,24 +42,22 @@ export const UserTable = ({
   users,
   verificationUserId,
 }: UserTableProps) => {
-  const { t } = useTranslation();
-
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>{t("adminUsers.account")}</TableHead>
-          <TableHead>{t("adminUsers.accountStatus")}</TableHead>
-          <TableHead>{t("adminUsers.subscription")}</TableHead>
+          <TableHead>Account</TableHead>
+          <TableHead>Account status</TableHead>
+          <TableHead>Subscription</TableHead>
           <TableHead>
-            <span className="sr-only">{t("adminUsers.actions")}</span>
+            <span className="sr-only">Actions</span>
           </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {users.length === 0 ? (
           <TableRow>
-            <TableCell colSpan={4}>{t("adminUsers.empty")}</TableCell>
+            <TableCell colSpan={4}>No accounts match your search.</TableCell>
           </TableRow>
         ) : (
           users.map((user) => {
@@ -73,27 +73,21 @@ export const UserTable = ({
                 </TableCell>
                 <TableCell>
                   <Badge variant={user.emailVerified ? "secondary" : "outline"}>
-                    {user.emailVerified
-                      ? t("adminUsers.verified")
-                      : t("adminUsers.unverified")}
+                    {user.emailVerified ? "Verified" : "Unverified"}
                   </Badge>{" "}
-                  {user.banned && (
-                    <Badge variant="destructive">
-                      {t("adminUsers.banned")}
-                    </Badge>
-                  )}{" "}
-                  <Badge variant="outline">{t(`roles.${user.role}`)}</Badge>
+                  {user.banned && <Badge variant="destructive">Banned</Badge>}{" "}
+                  <Badge variant="outline">{roleLabel(user.role)}</Badge>
                 </TableCell>
                 <TableCell>
                   {user.subscription
                     ? `${user.subscription.planKey} · ${user.subscription.status}`
-                    : t("adminUsers.noSubscription")}
+                    : "No active subscription"}
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
-                        aria-label={t("adminUsers.actions")}
+                        aria-label="Actions"
                         disabled={
                           isVerificationPending || isPasswordResetPending
                         }
@@ -108,13 +102,13 @@ export const UserTable = ({
                         <DropdownMenuItem
                           onClick={() => onResendVerification(user.id)}
                         >
-                          {t("adminUsers.resendVerification")}
+                          Resend verification
                         </DropdownMenuItem>
                       )}
                       <DropdownMenuItem
                         onClick={() => onResendPasswordReset(user.id)}
                       >
-                        {t("adminUsers.resendPasswordReset")}
+                        Send password reset
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

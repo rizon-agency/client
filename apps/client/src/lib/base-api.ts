@@ -4,12 +4,36 @@ import { z } from "zod";
 import { serverErrorCodes, type ServerErrorCode } from "@repo/constants/errors";
 import { AuthClientError } from "@/lib/auth-client";
 import { getAuthErrorTranslationCode } from "@/lib/auth-errors";
-import i18n from "@/lib/i18n";
 import { ROUTER_BASEPATH } from "@/config/constants";
 
 export type FieldError = {
   field: string;
   message: string;
+};
+
+const serverErrorMessages: Record<ServerErrorCode, string> = {
+  permissionDenied: "You don't have permission to do that.",
+  setupAlreadyCompleted: "Setup has already been completed.",
+  invalidCredentials: "Incorrect email or password.",
+  emailNotVerified: "Your email address hasn't been verified yet.",
+  passwordResetInvalid:
+    "This password reset link is invalid or has already been used.",
+  passwordResetExpired:
+    "This password reset link has expired. Please request a new one.",
+  sessionInvalid: "Your session is invalid. Please sign in again.",
+  sessionExpired: "Your session has expired. Please sign in again.",
+  emailAlreadyTaken: "That email address is already taken.",
+  invalidPassword: "Incorrect password.",
+  subscriptionExists: "You already have an active subscription.",
+  checkoutActive: "A checkout session is already in progress.",
+  noBillingCustomer: "No billing account was found.",
+  noActiveSubscription: "You don't have an active subscription.",
+  subscriptionNotResumable: "This subscription can no longer be resumed.",
+  planAlreadyActive: "That plan is already active.",
+  currentPlanInvalid: "Your current plan is no longer available.",
+  planInvalid: "That plan is not available.",
+  stripeCustomerMismatch: "We couldn't verify your billing account.",
+  userNotFound: "User not found.",
 };
 
 const isServerErrorCode = (value: string): value is ServerErrorCode =>
@@ -30,7 +54,7 @@ export const onError = (error: Error) => {
         : undefined;
 
   if (errorCode && isServerErrorCode(errorCode)) {
-    message = i18n.t(`serverErrors.${errorCode}`);
+    message = serverErrorMessages[errorCode];
   }
 
   toast.error(message);

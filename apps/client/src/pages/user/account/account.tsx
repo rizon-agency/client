@@ -6,9 +6,7 @@ import {
   CardTitle,
 } from "@repo/ui/components/ui/card";
 import { ChangePassword } from "@/components/change-password";
-import { LanguageCard } from "@/components/language-card";
 import { getRouteApi } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
 import { ChangeEmail } from "./change-email";
 import { SessionManagement } from "./session-management";
 import { DeleteAccount } from "./delete-account";
@@ -17,14 +15,13 @@ const route = getRouteApi("/user-layout");
 
 export const Account = () => {
   const { user } = route.useRouteContext();
-  const { t } = useTranslation();
 
   return (
     <>
       <Card>
         <CardHeader>
-          <CardTitle>{t("settings.profile.title")}</CardTitle>
-          <CardDescription>{t("settings.profile.description")}</CardDescription>
+          <CardTitle>Profile</CardTitle>
+          <CardDescription>Your account information</CardDescription>
         </CardHeader>
         <CardContent>
           <ChangeEmail email={user.email} />
@@ -33,8 +30,10 @@ export const Account = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>{t("password.title")}</CardTitle>
-          <CardDescription>{t("password.description")}</CardDescription>
+          <CardTitle>Change password</CardTitle>
+          <CardDescription>
+            Update your password to keep your account secure
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <ChangePassword />
@@ -43,9 +42,9 @@ export const Account = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>{t("settings.sessions.title")}</CardTitle>
+          <CardTitle>Sessions and devices</CardTitle>
           <CardDescription>
-            {t("settings.sessions.description")}
+            Review where you are signed in and end access you no longer need.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -53,13 +52,11 @@ export const Account = () => {
         </CardContent>
       </Card>
 
-      <LanguageCard />
-
       <Card>
         <CardHeader>
-          <CardTitle>{t("settings.deleteAccount.title")}</CardTitle>
+          <CardTitle>Delete account</CardTitle>
           <CardDescription>
-            {t("settings.deleteAccount.description")}
+            Permanently delete your account and all associated data.
           </CardDescription>
         </CardHeader>
         <CardContent>

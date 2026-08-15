@@ -16,7 +16,6 @@ import {
   CardTitle,
 } from "@repo/ui/components/ui/card";
 import { Spinner } from "@repo/ui/components/ui/spinner";
-import { useTranslation } from "react-i18next";
 
 interface Subscription {
   billingInterval: string;
@@ -60,28 +59,25 @@ export const CurrentPlan = ({
   showCancelConfirm,
   subscription,
 }: CurrentPlanProps) => {
-  const { t } = useTranslation();
-
   return (
     <>
       <Card>
         <CardHeader>
-          <CardTitle>{t("billing.current.title")}</CardTitle>
-          <CardDescription>{t("billing.current.description")}</CardDescription>
+          <CardTitle>Current plan</CardTitle>
+          <CardDescription>
+            Change or cancel your plan here. Manage payment methods and invoices
+            securely through Stripe.
+          </CardDescription>
           {subscription.cancelAtPeriodEnd && subscription.currentPeriodEnd && (
             <CardDescription>
-              {t("billing.current.accessEnds", {
-                date: formatDate(subscription.currentPeriodEnd),
-              })}
+              Your access ends on {formatDate(subscription.currentPeriodEnd)}.
             </CardDescription>
           )}
           {subscription.scheduledPlanKey &&
             subscription.scheduledBillingInterval && (
               <CardDescription>
-                {t("billing.current.switching", {
-                  plan: subscription.scheduledPlanKey,
-                  interval: subscription.scheduledBillingInterval,
-                })}
+                Switching to {subscription.scheduledPlanKey} (
+                {subscription.scheduledBillingInterval}) at next renewal.
               </CardDescription>
             )}
         </CardHeader>
@@ -91,12 +87,12 @@ export const CurrentPlan = ({
           <Badge variant="outline">{subscription.status}</Badge>
           <Button disabled={isAnyMutating} onClick={onPortal} variant="outline">
             {isPortalPending && <Spinner />}
-            {t("billing.current.manageBilling")}
+            Manage payments and invoices
           </Button>
           {subscription.cancelAtPeriodEnd ? (
             <Button disabled={isAnyMutating} onClick={onResume}>
               {isResumePending && <Spinner />}
-              {t("billing.current.resume")}
+              Resume
             </Button>
           ) : (
             <Button
@@ -104,7 +100,7 @@ export const CurrentPlan = ({
               onClick={() => onShowCancelConfirmChange(true)}
               variant="outline"
             >
-              {t("billing.current.cancel")}
+              Cancel subscription
             </Button>
           )}
         </CardContent>
@@ -118,17 +114,15 @@ export const CurrentPlan = ({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>
-              {t("billing.current.dialog.title")}
-            </AlertDialogTitle>
+            <AlertDialogTitle>Cancel subscription?</AlertDialogTitle>
             <AlertDialogDescription>
-              {t("billing.current.dialog.description")}
+              You&apos;ll keep access until the end of your current billing
+              period.
               {subscription.currentPeriodEnd && (
                 <>
                   {" "}
-                  {t("billing.current.dialog.accessEnds", {
-                    date: formatDate(subscription.currentPeriodEnd),
-                  })}
+                  Your access ends on{" "}
+                  {formatDate(subscription.currentPeriodEnd)}.
                 </>
               )}
             </AlertDialogDescription>
@@ -139,11 +133,11 @@ export const CurrentPlan = ({
               onClick={() => onShowCancelConfirmChange(false)}
               variant="outline"
             >
-              {t("billing.current.dialog.keep")}
+              Keep subscription
             </Button>
             <Button disabled={isCancelPending} onClick={onCancel}>
               {isCancelPending && <Spinner />}
-              {t("billing.current.dialog.confirm")}
+              Cancel subscription
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

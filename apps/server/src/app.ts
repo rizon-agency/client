@@ -1,8 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { getCookie } from "hono/cookie";
 import { serveStatic } from "hono/bun";
-import { defaultLocale, isLocale } from "@repo/i18n/config";
 import { Services } from "./services";
 import { AppError } from "./lib/errors";
 import type { Context } from "./context";
@@ -128,24 +126,6 @@ export const initApp = async (params: initAppParams) => {
     const report = await context.get("services").health.check();
 
     return context.json(report, report.status === "unhealthy" ? 503 : 200);
-  });
-
-  app.get("/", (context) => {
-    const cookieLocale = getCookie(context, "NEXT_LOCALE");
-
-    if (cookieLocale && isLocale(cookieLocale)) {
-      return context.redirect(`/${cookieLocale}/`);
-    }
-
-    const preferred = (context.req.header("accept-language") ?? "")
-      .split(",")
-      .map(
-        (part) => part.split(";")[0]?.trim().slice(0, 2).toLowerCase() ?? "",
-      );
-
-    const locale = preferred.find(isLocale) ?? defaultLocale;
-
-    return context.redirect(`/${locale}/`);
   });
 
   app.use("/*", serveStatic({ root: "./front" }));

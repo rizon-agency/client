@@ -23,7 +23,6 @@ import {
   TimerIcon,
   type LucideIcon,
 } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 type QueueOverview = Awaited<
   ReturnType<typeof api.queue.overview>
@@ -35,17 +34,48 @@ type BadgeVariant = "default" | "secondary" | "destructive" | "outline";
 
 interface StateConfig {
   key: CountKey;
+  label: string;
   icon: LucideIcon;
   activeVariant: BadgeVariant;
 }
 
 const states: StateConfig[] = [
-  { key: "waiting", icon: ClockIcon, activeVariant: "secondary" },
-  { key: "active", icon: ActivityIcon, activeVariant: "default" },
-  { key: "completed", icon: CircleCheckIcon, activeVariant: "secondary" },
-  { key: "failed", icon: CircleAlertIcon, activeVariant: "destructive" },
-  { key: "delayed", icon: TimerIcon, activeVariant: "secondary" },
-  { key: "paused", icon: CirclePauseIcon, activeVariant: "secondary" },
+  {
+    key: "waiting",
+    label: "Waiting",
+    icon: ClockIcon,
+    activeVariant: "secondary",
+  },
+  {
+    key: "active",
+    label: "Active",
+    icon: ActivityIcon,
+    activeVariant: "default",
+  },
+  {
+    key: "completed",
+    label: "Completed",
+    icon: CircleCheckIcon,
+    activeVariant: "secondary",
+  },
+  {
+    key: "failed",
+    label: "Failed",
+    icon: CircleAlertIcon,
+    activeVariant: "destructive",
+  },
+  {
+    key: "delayed",
+    label: "Delayed",
+    icon: TimerIcon,
+    activeVariant: "secondary",
+  },
+  {
+    key: "paused",
+    label: "Paused",
+    icon: CirclePauseIcon,
+    activeVariant: "secondary",
+  },
 ];
 
 interface QueueCountsProps {
@@ -53,21 +83,17 @@ interface QueueCountsProps {
 }
 
 export const QueueCounts = ({ queues }: QueueCountsProps) => {
-  const { t } = useTranslation();
-
   return (
     <div className="space-y-4">
       {queues.map((queue) => (
         <Card key={queue.name}>
           <CardHeader>
-            <CardTitle>
-              {t("adminQueues.queueTitle", { name: queue.name })}
-            </CardTitle>
-            <CardDescription>{t("adminQueues.countsCaption")}</CardDescription>
+            <CardTitle>{queue.name} queue</CardTitle>
+            <CardDescription>Job counts by state</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {states.map(({ key, icon: Icon, activeVariant }) => {
+              {states.map(({ key, label, icon: Icon, activeVariant }) => {
                 const value = queue.counts[key];
 
                 return (
@@ -76,7 +102,7 @@ export const QueueCounts = ({ queues }: QueueCountsProps) => {
                       <Icon />
                     </ItemMedia>
                     <ItemContent>
-                      <ItemTitle>{t(`adminQueues.states.${key}`)}</ItemTitle>
+                      <ItemTitle>{label}</ItemTitle>
                     </ItemContent>
                     <ItemActions>
                       <Badge variant={value === 0 ? "outline" : activeVariant}>

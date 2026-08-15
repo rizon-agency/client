@@ -4,18 +4,16 @@ import {
   AdminPageHeader,
   AdminPageTitle,
 } from "@/components/admin-page";
-import { useTranslation } from "react-i18next";
 import { Users } from "./users";
 
 export const AdminUsersPage = () => {
-  const { t } = useTranslation();
-
   return (
     <AdminPage>
       <AdminPageHeader>
-        <AdminPageTitle>{t("adminUsers.title")}</AdminPageTitle>
+        <AdminPageTitle>Users</AdminPageTitle>
         <AdminPageDescription>
-          {t("adminUsers.description")}
+          Search accounts, review billing status, and send account recovery
+          emails.
         </AdminPageDescription>
       </AdminPageHeader>
       <Users />

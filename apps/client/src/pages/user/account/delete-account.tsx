@@ -23,7 +23,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import z from "zod";
 
 const createSchema = (message: string) =>
@@ -35,9 +34,8 @@ const createSchema = (message: string) =>
 
 export const DeleteAccount = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const schema = createSchema(t("validation.accountDeletionConfirmation"));
+  const schema = createSchema('Type "confirm" to continue');
   const form = useForm({
     defaultValues: {
       confirmation: "",
@@ -75,19 +73,16 @@ export const DeleteAccount = () => {
   return (
     <>
       <Button variant="destructive" onClick={() => setOpen(true)}>
-        {t("settings.deleteAccount.trigger")}
+        Delete account
       </Button>
 
       <AlertDialog open={open} onOpenChange={onOpenChange}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>
-              {t("settings.deleteAccount.dialog.title")}
-            </AlertDialogTitle>
+            <AlertDialogTitle>Delete your account?</AlertDialogTitle>
             <AlertDialogDescription>
-              {t("settings.deleteAccount.dialog.description", {
-                confirmation: ACCOUNT_DELETION_CONFIRMATION,
-              })}
+              This action cannot be undone. Type &quot;
+              {ACCOUNT_DELETION_CONFIRMATION}&quot; to continue.
             </AlertDialogDescription>
           </AlertDialogHeader>
 
@@ -98,9 +93,7 @@ export const DeleteAccount = () => {
                 name="confirmation"
                 render={({ field, fieldState }) => (
                   <Field>
-                    <FieldLabel htmlFor={field.name}>
-                      {t("settings.deleteAccount.dialog.label")}
-                    </FieldLabel>
+                    <FieldLabel htmlFor={field.name}>Confirmation</FieldLabel>
                     <CustomInput
                       {...field}
                       autoComplete="off"
@@ -121,7 +114,7 @@ export const DeleteAccount = () => {
                   type="button"
                   variant="outline"
                 >
-                  {t("settings.deleteAccount.dialog.cancel")}
+                  Cancel
                 </Button>
                 <Button
                   disabled={mutation.isPending}
@@ -129,7 +122,7 @@ export const DeleteAccount = () => {
                   variant="destructive"
                 >
                   {mutation.isPending && <Spinner />}
-                  {t("settings.deleteAccount.dialog.confirm")}
+                  Permanently delete account
                 </Button>
               </AlertDialogFooter>
             </FieldGroup>

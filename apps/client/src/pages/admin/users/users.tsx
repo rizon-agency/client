@@ -5,13 +5,11 @@ import { adminUsersRoute } from "@/routes/admin/users";
 import { Card, CardContent } from "@repo/ui/components/ui/card";
 import { Spinner } from "@repo/ui/components/ui/spinner";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { UserFilters } from "./user-filters";
 import { UserTable } from "./user-table";
 
 export const Users = () => {
-  const { t } = useTranslation();
   const searchParams = adminUsersRoute.useSearch();
   const navigate = adminUsersRoute.useNavigate();
   const queryClient = useQueryClient();
@@ -31,7 +29,7 @@ export const Users = () => {
     mutationFn: (userId: string) => api.user.resendVerification({ userId }),
     onError,
     onSuccess: async () => {
-      toast.success(t("adminUsers.verificationSent"));
+      toast.success("Verification email sent.");
       await invalidate();
     },
   });
@@ -40,7 +38,7 @@ export const Users = () => {
     mutationFn: (userId: string) => api.user.resendPasswordReset({ userId }),
     onError,
     onSuccess: async () => {
-      toast.success(t("adminUsers.passwordResetSent"));
+      toast.success("Password reset email sent.");
       await invalidate();
     },
   });

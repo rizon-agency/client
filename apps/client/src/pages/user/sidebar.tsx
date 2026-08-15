@@ -13,7 +13,6 @@ import {
   useSidebar,
 } from "@repo/ui/components/ui/sidebar";
 import { Link, useLocation } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
 import { Logo, LogoWithText } from "@repo/ui/logo-mark";
 import {
   LayoutDashboardIcon,
@@ -30,23 +29,18 @@ interface UserSidebarProps {
 }
 
 interface NavigationItem {
-  labelKey: "nav.dashboard" | "nav.billing";
+  label: string;
   to: "/user/dashboard" | "/user/billing";
   icon: LucideIcon;
 }
 
 const navigation: NavigationItem[] = [
-  {
-    labelKey: "nav.dashboard",
-    to: "/user/dashboard",
-    icon: LayoutDashboardIcon,
-  },
-  { labelKey: "nav.billing", to: "/user/billing", icon: CreditCardIcon },
+  { label: "Dashboard", to: "/user/dashboard", icon: LayoutDashboardIcon },
+  { label: "Billing", to: "/user/billing", icon: CreditCardIcon },
 ];
 
 export const UserSidebar: React.FC<UserSidebarProps> = ({ user }) => {
   const location = useLocation();
-  const { t } = useTranslation();
   const { isMobile, setOpenMobile } = useSidebar();
 
   const closeOnMobile = () => {
@@ -88,11 +82,11 @@ export const UserSidebar: React.FC<UserSidebarProps> = ({ user }) => {
                   <SidebarMenuButton
                     asChild
                     isActive={location.pathname === item.to}
-                    tooltip={t(item.labelKey)}
+                    tooltip={item.label}
                   >
                     <Link to={item.to} onClick={closeOnMobile}>
                       <item.icon />
-                      <span>{t(item.labelKey)}</span>
+                      <span>{item.label}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

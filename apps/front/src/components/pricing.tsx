@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { billingPlans } from "@repo/constants/billing";
 import { Pricing as PricingSection } from "@repo/ui/components/pricing";
 import { Button } from "@repo/ui/components/ui/button";
@@ -11,12 +10,10 @@ interface PricingProps {
 }
 
 export const Pricing = ({ appUrl }: PricingProps) => {
-  const t = useTranslations("pricing");
-
   return (
     <PricingSection
       className="mx-auto max-w-6xl px-6 py-24"
-      description={t("description")}
+      description="One plan for every stage. No hidden fees."
       id="pricing"
       plans={billingPlans}
       renderAction={({ featured }) => (
@@ -28,10 +25,10 @@ export const Pricing = ({ appUrl }: PricingProps) => {
           )}
           variant={featured ? "default" : "outline"}
         >
-          <a href={appUrl}>{t("getStarted")}</a>
+          <a href={appUrl}>Get started</a>
         </Button>
       )}
-      title={t("title")}
+      title="Simple, transparent pricing."
     />
   );
 };

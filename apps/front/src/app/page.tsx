@@ -5,43 +5,40 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { notFound } from "next/navigation";
-import { hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import Link from "next/link";
 import { Button } from "@repo/ui/components/ui/button";
 import { Logo } from "@repo/ui/logo-mark";
 import { env } from "@/config/env";
-import { Link } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
-import { LanguageSwitcher } from "@/components/language-switcher";
 import { Pricing } from "@/components/pricing";
 
-export default async function Home({ params }: PageProps<"/[locale]">) {
-  const { locale } = await params;
+const steps = [
+  "Define your product model",
+  "Add your customer workflow",
+  "Ship with confidence",
+];
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
+const foundations = [
+  "Secure session-based authentication",
+  "A first-admin setup flow",
+  "Typed API, database, and frontend",
+  "Storage and email abstractions ready to adapt",
+];
 
-  setRequestLocale(locale);
-
-  const t = await getTranslations();
-  const steps: string[] = t.raw("workspace.steps");
-  const foundations: string[] = t.raw("foundation.items");
-  const appUrl = `${env.APP_URL}?lng=${locale}`;
+export default function Home() {
+  const appUrl = env.APP_URL;
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
-        <Link href="/" aria-label={t("nav.home")}>
+        <Link href="/" aria-label="Client home">
           <Logo size={38} />
         </Link>
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost">
-            <Link href="/blog">{t("nav.blog")}</Link>
+            <Link href="/blog">Blog</Link>
           </Button>
           <Button asChild variant="outline">
-            <a href={appUrl}>{t("nav.signIn")}</a>
+            <a href={appUrl}>Sign in</a>
           </Button>
         </div>
       </nav>
@@ -49,33 +46,34 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <section className="mx-auto grid max-w-6xl gap-16 px-6 pb-24 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pt-28">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-sm font-medium text-primary">
-            <Sparkles className="size-4" /> {t("hero.badge")}
+            <Sparkles className="size-4" /> A clean foundation for your next
+            product
           </div>
           <h1 className="mt-7 max-w-3xl text-5xl font-semibold tracking-[-0.04em] sm:text-6xl">
-            {t("hero.title")}
+            Build the part only you can build.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            {t("hero.description")}
+            Client gives you the essential infrastructure—accounts, setup,
+            database, API, and a polished app shell—without inheriting another
+            product&apos;s assumptions.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button asChild size="lg">
               <a href={appUrl}>
-                {t("hero.openApp")} <ArrowRight className="size-4" />
+                Open the app <ArrowRight className="size-4" />
               </a>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href="#foundation">{t("hero.exploreFoundation")}</a>
+              <a href="#foundation">Explore the foundation</a>
             </Button>
           </div>
         </div>
         <div className="rounded-3xl border border-border bg-card p-6 shadow-2xl shadow-primary/10 sm:p-8">
           <div className="flex items-center justify-between border-b border-border pb-5">
             <div>
-              <p className="text-sm font-medium text-primary">
-                {t("workspace.label")}
-              </p>
+              <p className="text-sm font-medium text-primary">Your workspace</p>
               <p className="mt-1 text-xl font-semibold">
-                {t("workspace.title")}
+                Ready for a domain model
               </p>
             </div>
             <Layers3 className="size-9 text-primary" />
@@ -99,11 +97,9 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <section id="foundation" className="border-y border-border bg-muted/40">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="max-w-2xl">
-            <p className="text-sm font-medium text-primary">
-              {t("foundation.label")}
-            </p>
+            <p className="text-sm font-medium text-primary">The foundation</p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-              {t("foundation.title")}
+              Enough structure to move fast. Enough space to make it yours.
             </h2>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -123,12 +119,11 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <Pricing appUrl={appUrl} />
 
       <footer className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm text-muted-foreground">
-        <span>{t("footer.tagline")}</span>
+        <span>Built to become your product.</span>
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-2">
-            <Check className="size-4 text-primary" /> {t("footer.note")}
+            <Check className="size-4 text-primary" /> No demo domain included
           </span>
-          <LanguageSwitcher />
         </div>
       </footer>
     </main>

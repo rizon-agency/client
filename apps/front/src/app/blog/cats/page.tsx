@@ -1,57 +1,33 @@
 import type { Metadata } from "next";
 import { ArrowLeft, Cat } from "lucide-react";
-import { notFound } from "next/navigation";
-import { hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import Link from "next/link";
 import rehypePrettyCode from "rehype-pretty-code";
 import { MarkdownAsync } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Button } from "@repo/ui/components/ui/button";
-import { Link } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
 import { getBlogPost } from "@/lib/blog";
 import { buildMetadata } from "@/lib/seo";
 
-export async function generateMetadata({
-  params,
-}: PageProps<"/[locale]/blog/cats">): Promise<Metadata> {
-  const { locale } = await params;
-
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
-  const t = await getTranslations({ locale });
-  const post = await getBlogPost(locale, "cats");
+export async function generateMetadata(): Promise<Metadata> {
+  const post = await getBlogPost("cats");
 
   return buildMetadata({
-    locale,
-    siteName: t("metadata.siteName"),
+    siteName: "Client",
     title: post.title,
     description: post.description,
     path: "/blog/cats",
   });
 }
 
-export default async function CatsArticle({
-  params,
-}: PageProps<"/[locale]/blog/cats">) {
-  const { locale } = await params;
-
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
-  setRequestLocale(locale);
-  const t = await getTranslations();
-  const post = await getBlogPost(locale, "cats");
+export default async function CatsArticle() {
+  const post = await getBlogPost("cats");
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <article className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
         <Button asChild variant="ghost">
           <Link href="/blog">
-            <ArrowLeft className="size-4" /> {t("blog.back")}
+            <ArrowLeft className="size-4" /> Back to the blog
           </Link>
         </Button>
 

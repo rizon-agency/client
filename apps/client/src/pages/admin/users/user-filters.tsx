@@ -6,7 +6,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select";
-import { useTranslation } from "react-i18next";
 
 interface UserFiltersProps {
   onRoleChange: (role: "admin" | "user" | undefined) => void;
@@ -27,14 +26,12 @@ export const UserFilters = ({
   search,
   verification,
 }: UserFiltersProps) => {
-  const { t } = useTranslation();
-
   return (
     <div className="flex flex-wrap gap-2">
       <Search
         key={search ?? "default"}
         onSearch={onSearch}
-        placeholder={t("adminUsers.search")}
+        placeholder="Search by email"
         value={search}
       />
       <Select
@@ -46,12 +43,12 @@ export const UserFilters = ({
         value={role ?? "all"}
       >
         <SelectTrigger>
-          <SelectValue placeholder={t("adminUsers.role")} />
+          <SelectValue placeholder="Role" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">{t("adminUsers.allRoles")}</SelectItem>
-          <SelectItem value="admin">{t("roles.admin")}</SelectItem>
-          <SelectItem value="user">{t("roles.user")}</SelectItem>
+          <SelectItem value="all">All roles</SelectItem>
+          <SelectItem value="admin">Admin</SelectItem>
+          <SelectItem value="user">User</SelectItem>
         </SelectContent>
       </Select>
       <Select
@@ -63,14 +60,12 @@ export const UserFilters = ({
         value={verification ?? "all"}
       >
         <SelectTrigger>
-          <SelectValue placeholder={t("adminUsers.verification")} />
+          <SelectValue placeholder="Verification" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">{t("adminUsers.allVerification")}</SelectItem>
-          <SelectItem value="verified">{t("adminUsers.verified")}</SelectItem>
-          <SelectItem value="unverified">
-            {t("adminUsers.unverified")}
-          </SelectItem>
+          <SelectItem value="all">All verification states</SelectItem>
+          <SelectItem value="verified">Verified</SelectItem>
+          <SelectItem value="unverified">Unverified</SelectItem>
         </SelectContent>
       </Select>
     </div>

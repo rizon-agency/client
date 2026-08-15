@@ -1,5 +1,4 @@
 import { authClient, unwrapAuthResponse } from "@/lib/auth-client";
-import i18n from "@/lib/i18n";
 import { PasswordInput } from "@/components/password-input";
 import { Button } from "@repo/ui/components/ui/button";
 import {
@@ -16,7 +15,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Controller, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import z from "zod";
 
@@ -28,7 +26,7 @@ const schema = z
     passwordConfirmation: z.string().min(8).max(60),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
-    error: () => i18n.t("validation.passwordsMatch"),
+    error: () => "Passwords don't match",
     path: ["passwordConfirmation"],
   });
 
@@ -36,7 +34,6 @@ type Output = z.output<typeof schema>;
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -60,7 +57,7 @@ export const SignUp = () => {
       );
     },
     onSuccess: () => {
-      toast.success(t("auth.signUp.verifyEmailToast"));
+      toast.success("Check your inbox to verify your email");
       navigate({ to: "/sign-in" });
     },
     onError,
@@ -78,9 +75,7 @@ export const SignUp = () => {
           name="name"
           render={({ field, fieldState }) => (
             <Field>
-              <FieldLabel htmlFor={field.name}>
-                {t("auth.signUp.name")}
-              </FieldLabel>
+              <FieldLabel htmlFor={field.name}>Full name</FieldLabel>
               <CustomInput {...field} id={field.name} placeholder="Jane Doe" />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
@@ -92,9 +87,7 @@ export const SignUp = () => {
           name="email"
           render={({ field, fieldState }) => (
             <Field>
-              <FieldLabel htmlFor={field.name}>
-                {t("auth.signUp.email")}
-              </FieldLabel>
+              <FieldLabel htmlFor={field.name}>Email address</FieldLabel>
               <CustomInput
                 {...field}
                 id={field.name}
@@ -111,9 +104,7 @@ export const SignUp = () => {
           name="password"
           render={({ field, fieldState }) => (
             <Field>
-              <FieldLabel htmlFor={field.name}>
-                {t("auth.signUp.password")}
-              </FieldLabel>
+              <FieldLabel htmlFor={field.name}>Password</FieldLabel>
               <PasswordInput
                 {...field}
                 id={field.name}
@@ -129,9 +120,7 @@ export const SignUp = () => {
           name="passwordConfirmation"
           render={({ field, fieldState }) => (
             <Field>
-              <FieldLabel htmlFor={field.name}>
-                {t("auth.signUp.confirmPassword")}
-              </FieldLabel>
+              <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
               <PasswordInput
                 {...field}
                 id={field.name}
@@ -143,17 +132,17 @@ export const SignUp = () => {
         />
 
         <Button type="submit" disabled={signUp.isPending}>
-          {signUp.isPending && <Spinner />} {t("auth.signUp.submit")}
+          {signUp.isPending && <Spinner />} Sign Up
         </Button>
 
         <div className="flex items-center gap-4 text-muted-foreground">
           <Separator className="shrink flex-1" />
-          <span className="text-sm">{t("common.or")}</span>
+          <span className="text-sm">OR</span>
           <Separator className="shrink flex-1" />
         </div>
 
         <Button size="lg" variant="outline" disabled={signUp.isPending} asChild>
-          <Link to="/sign-in">{t("common.signIn")}</Link>
+          <Link to="/sign-in">Sign in</Link>
         </Button>
       </FieldGroup>
     </form>

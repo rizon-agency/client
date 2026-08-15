@@ -11,7 +11,6 @@ import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
 import {
   AuthClientError,
   authClient,
@@ -39,7 +38,6 @@ type Output = z.output<typeof signInSchema>;
 
 export const SignIn = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   const form = useForm({
     resolver: zodResolver(signInSchema),
@@ -81,7 +79,7 @@ export const SignIn = () => {
       );
     },
     onSuccess: () => {
-      toast.success(t("auth.signIn.verificationResent"));
+      toast.success("A new verification link was sent.");
     },
     onError,
   });
@@ -102,9 +100,7 @@ export const SignIn = () => {
           control={form.control}
           render={({ field, fieldState }) => (
             <Field>
-              <FieldLabel htmlFor={field.name}>
-                {t("auth.signIn.email")}
-              </FieldLabel>
+              <FieldLabel htmlFor={field.name}>Email address</FieldLabel>
               <CustomInput
                 {...field}
                 id={field.name}
@@ -122,9 +118,9 @@ export const SignIn = () => {
           render={({ field, fieldState }) => (
             <Field>
               <FieldLabel htmlFor={field.name}>
-                {t("auth.signIn.password")}
+                Password
                 <Link to="/forgot-password" className="text-primary ml-auto">
-                  {t("auth.signIn.forgotPassword")}
+                  Forgot password?
                 </Link>
               </FieldLabel>
               <PasswordInput
@@ -138,17 +134,16 @@ export const SignIn = () => {
         />
 
         <Button size="lg" type="submit" disabled={signIn.isPending}>
-          {signIn.isPending && <Spinner />} {t("auth.signIn.submit")}
+          {signIn.isPending && <Spinner />} Sign In
         </Button>
 
         {needsEmailVerification && (
           <Alert>
             <MailCheck />
-            <AlertTitle>{t("auth.signIn.verificationSent")}</AlertTitle>
+            <AlertTitle>Verification email sent</AlertTitle>
             <AlertDescription>
-              {t("auth.signIn.verificationSentDescription", {
-                email: form.getValues("email"),
-              })}
+              We sent a new verification link to {form.getValues("email")}.
+              Check your inbox.
             </AlertDescription>
             <AlertAction>
               <Button
@@ -159,7 +154,7 @@ export const SignIn = () => {
                 onClick={() => resendVerification.mutate()}
               >
                 {resendVerification.isPending && <Spinner />}
-                {t("auth.signIn.resendVerification")}
+                Send again
               </Button>
             </AlertAction>
           </Alert>
@@ -167,12 +162,12 @@ export const SignIn = () => {
 
         <div className="flex items-center gap-4 text-muted-foreground">
           <Separator className="shrink flex-1" />
-          <span className="text-sm">{t("common.or")}</span>
+          <span className="text-sm">OR</span>
           <Separator className="shrink flex-1" />
         </div>
 
         <Button size="lg" variant="outline" disabled={signIn.isPending} asChild>
-          <Link to="/sign-up">{t("auth.signIn.createAccount")}</Link>
+          <Link to="/sign-up">Create an account</Link>
         </Button>
       </FieldGroup>
     </form>
