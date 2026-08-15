@@ -1,4 +1,41 @@
-# Client
+# Project
+
+An AI knowledge agent for agencies that run client projects.
+
+It ingests everything a project produces: recorded meetings, transcripts, shared documents, specs, and written decisions. It organises them per client, in isolated corpora that never mix. The team queries it two ways: through a web chat interface, or by mentioning the bot in Discord or Slack.
+
+Every answer comes back with the source quoted, the document named, and the line or timestamp referenced. No answer without a citation.
+
+On top of retrieval, it runs two passes at ingest time:
+
+- Decision extraction. Commitments, constraints, approvals, and rejections are pulled out as structured records with speaker and timestamp attached, rather than left buried in raw transcript text.
+- Gap detection. Questions the corpus cannot answer are logged. Each week these are grouped into a draft agenda for the next client call.
+
+## Goal
+
+Make the project record queryable, so that any developer, designer, or lead can get a sourced answer in seconds instead of rereading a forty page specification or waiting for someone to remember what was said in March.
+
+Second goal: make what the client actually agreed to provable. Not remembered, not assumed. Quoted, dated, attributed.
+
+## Why We Built It
+
+We run an e-learning agency. Five developers, one designer, one client meeting per week per project, plus documentation moving in both directions constantly.
+
+Three things kept costing us money.
+
+Developers rereading documents. A task raises one small question and the only way to answer it is to open the spec and scan it again, or to interrupt someone who was in the meeting. Both are expensive. The knowledge existed, it just was not reachable.
+
+Scope disputes we could not win. Halfway through a build a feature would come up and nobody could say for certain whether the client had asked for it, approved it, or whether we had assumed it. Without a record, you either eat the work or have an uncomfortable conversation. We ate the work more often than we should have.
+
+Wasted client calls. Every week we had to ask the team what they still needed to know, collect it by hand, and hope nothing was missed. It usually was, so the question waited another seven days.
+
+Existing tools did not fit. Enterprise search products assume one company, one corpus, one permission model. An agency is the opposite: many clients, each under a separate NDA, each needing hard isolation, each with a start date and an end date and a handover. Client data cannot leak across that boundary, and when a project closes the corpus has to be exportable or deletable on request.
+
+So we built it for ourselves first, on our own client work, and only then for other agencies with the same shape of problem.
+
+---
+
+# Codebase
 
 At the start of each conversation, read the following package.json files to understand available scripts and dependencies:
 
