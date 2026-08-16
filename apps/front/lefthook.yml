@@ -1,9 +1,0 @@
-post-merge:
-  commands:
-    install-deps:
-      run: pnpm install
-
-commit-msg:
-  commands:
-    "lint commit message":
-      run: pnpm commitlint --edit {1}
