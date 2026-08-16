@@ -1,38 +1,59 @@
-import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import { cn } from "@repo/ui/utils";
-import { buildMetadata } from "@/lib/seo";
-import { JsonLd } from "@/components/json-ld";
-import { organizationSchema, websiteSchema } from "@/lib/structured-data";
-import "./globals.css";
+import { RootProvider } from "fumadocs-ui/provider/next";
+import type { Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import type { ReactNode } from "react";
+import { createMetadata } from "@/lib/metadata";
+import "@/styles/globals.css";
+import "katex/dist/katex.css";
+import { baseUrl } from "@/lib/constants";
+import { Body } from "./layout.client";
+import { description as homeDescription } from "./layout.shared";
+import { Provider } from "./provider";
 
-const geist = Geist({
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  variable: "--font-sans",
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  return buildMetadata({
-    siteName: "Client",
-    title: "Client — Build what only you can build",
-    description:
-      "A clean, typed foundation for building focused SaaS products.",
-    path: "/",
-  });
-}
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const metadata = createMetadata({
+  title: {
+    template: "%s | SaasCN",
+    default: "SaasCN",
+  },
+  description: homeDescription,
+  metadataBase: baseUrl,
+});
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
+    { media: "(prefers-color-scheme: light)", color: "#fff" },
+  ],
+};
+
+const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <html lang="en" className={cn("h-full antialiased dark", geist.variable)}>
-      <body className="min-h-full flex flex-col font-sans">
-        <JsonLd data={organizationSchema("Client")} />
-        <JsonLd data={websiteSchema("Client")} />
-        {children}
-      </body>
+    <html
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      lang="en"
+      suppressHydrationWarning
+    >
+      <Body>
+        <RootProvider
+          theme={{
+            enabled: false,
+          }}
+        >
+          <Provider>{children}</Provider>
+        </RootProvider>
+      </Body>
     </html>
   );
-}
+};
+
+export default RootLayout;
