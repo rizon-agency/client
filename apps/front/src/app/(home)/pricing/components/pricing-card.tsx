@@ -3,9 +3,9 @@
 import NumberFlow from "@number-flow/react";
 import { ArrowRight, CheckIcon } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Badge } from "@repo/ui/components/ui/badge";
+import { buttonVariants } from "@repo/ui/components/ui/button";
+import { cn } from "@repo/ui/utils";
 import type { PricingTier } from "../data";
 
 interface PricingCardProps {

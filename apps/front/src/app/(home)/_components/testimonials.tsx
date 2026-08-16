@@ -3,13 +3,17 @@
 import { User } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Section } from "@/components/section";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@repo/ui/components/ui/avatar";
 import {
   Carousel,
   type CarouselApi,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@repo/ui/components/ui/carousel";
 
 const testimonials = [
   {

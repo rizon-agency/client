@@ -7,7 +7,7 @@ import {
 } from "@/app/layout.shared";
 import { InlineLink } from "@/components/inline-link";
 import { getSortedByDatePosts, getTags } from "@/lib/source";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 import { ActiveLink } from "../active-link";
 import { ThemeToggle } from "../theme-toggle";
 

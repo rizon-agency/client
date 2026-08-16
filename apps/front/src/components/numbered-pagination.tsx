@@ -1,14 +1,14 @@
 "use client";
 import { Icons } from "@/components/icons/icons";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@repo/ui/components/ui/button";
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationLink,
-} from "@/components/ui/pagination";
+} from "@repo/ui/components/ui/pagination";
 import { usePagination } from "@/hooks/use-pagination";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 
 interface NumberedPaginationProps {
   currentPage: number;

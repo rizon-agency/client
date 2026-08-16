@@ -7,7 +7,7 @@ import {
   NavigationMenuViewport,
 } from "fumadocs-ui/components/ui/navigation-menu";
 import { type HTMLAttributes, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 
 export const Navbar = (props: HTMLAttributes<HTMLElement>) => {
   const [value, setValue] = useState("");

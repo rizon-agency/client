@@ -7,7 +7,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@repo/ui/components/ui/carousel";
 import ClaudeDark from "@/public/images/logos/dark/claude.svg";
 import NeonDark from "@/public/images/logos/dark/neon.svg";
 import NextjsDark from "@/public/images/logos/dark/nextjs.svg";

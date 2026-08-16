@@ -3,7 +3,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@repo/ui/components/ui/carousel";
 import type { Page } from "@/lib/source";
 import { PostCard } from "./update-card";
 

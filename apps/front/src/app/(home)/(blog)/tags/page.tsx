@@ -4,7 +4,7 @@ import { Section } from "@/components/section";
 import { TagCard } from "@/components/tags/tag-card";
 import { createMetadata } from "@/lib/metadata";
 import { getTags } from "@/lib/source";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 
 export default function Page() {
   const tags = getTags();

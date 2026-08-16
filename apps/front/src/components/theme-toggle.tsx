@@ -5,7 +5,7 @@ import { Airplay, Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
 import { useTheme } from "next-themes";
 import { type HTMLAttributes, useLayoutEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 
 const themes = [
   {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Icons } from "@/components/icons/icons";
 import { getPostsByTag } from "@/lib/source";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 
 export const TagCard = ({
   name,

@@ -7,8 +7,8 @@ import {
   type UploadIconHandle as ShareIconHandle,
 } from "@/components/icons/animated/upload";
 import { Icons } from "@/components/icons/icons";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@repo/ui/components/ui/button";
+import { cn } from "@repo/ui/utils";
 
 export function Share({ url }: { url: string }): React.ReactElement {
   const iconRef = useRef<ShareIconHandle>(null);

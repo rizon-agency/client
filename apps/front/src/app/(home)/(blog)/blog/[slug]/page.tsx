@@ -12,7 +12,7 @@ import { Section } from "@/components/section";
 import { TagCard } from "@/components/tags/tag-card";
 import { createMetadata, getPageImage } from "@/lib/metadata";
 import { getPost, getPosts, type Page as MDXPage } from "@/lib/source";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 
 function Header(props: { page: MDXPage; tags?: string[] }) {
   const { page, tags } = props;

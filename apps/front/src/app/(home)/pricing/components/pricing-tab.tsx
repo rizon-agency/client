@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "motion/react";
 
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { Badge } from "@repo/ui/components/ui/badge";
+import { cn } from "@repo/ui/utils";
 
 interface TabProps {
   text: string;

@@ -5,7 +5,7 @@ import { ArrowRight, CheckIcon, HelpCircleIcon, MinusIcon } from "lucide-react";
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
 import { Section } from "@/components/section";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@repo/ui/components/ui/button";
 import {
   Table,
   TableBody,
@@ -13,14 +13,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@repo/ui/components/ui/table";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+} from "@repo/ui/components/ui/tooltip";
+import { cn } from "@repo/ui/utils";
 import { groups, plans } from "../data";
 
 export const PricingTable = ({

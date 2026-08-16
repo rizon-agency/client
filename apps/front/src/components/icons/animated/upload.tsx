@@ -5,7 +5,7 @@ import { motion, useAnimation } from "motion/react";
 import type { ButtonHTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 
 export interface UploadIconHandle {
   startAnimation: () => void;

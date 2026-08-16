@@ -22,7 +22,7 @@ import {
 import { useIsScrollTop } from "fumadocs-ui/utils/use-is-scroll-top";
 import { ChevronDown } from "lucide-react";
 import { type ComponentProps, Fragment, useMemo, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 import { LinkItem } from "./link-item";
 import { LargeSearchToggle, SearchToggle } from "./search-toggle";
 import { ThemeToggle } from "./theme-toggle";

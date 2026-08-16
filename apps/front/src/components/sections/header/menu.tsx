@@ -19,7 +19,7 @@ import type { LinkItemType } from "fumadocs-ui/layouts/shared";
 import { Search } from "lucide-react";
 import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import { isActive } from "@/lib/is-active";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 
 const menuItemVariants = cva("", {
   variants: {

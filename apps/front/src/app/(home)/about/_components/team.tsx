@@ -1,6 +1,6 @@
 import { BlurImage } from "@/components/blur-image";
 import { Section } from "@/components/section";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui/utils";
 import TeamImage from "@/public/images/about/team.png";
 
 const Team = () => {

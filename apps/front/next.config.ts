@@ -18,6 +18,7 @@ async function createNextConfig(): Promise<NextConfig> {
       NEXT_PUBLIC_APP_URL: env.NEXT_PUBLIC_APP_URL,
     },
     reactStrictMode: true,
+    transpilePackages: ["@repo/ui"],
     poweredByHeader: false,
     productionBrowserSourceMaps: process.env.SOURCE_MAPS === "true",
     devIndicators: false,
